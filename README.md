@@ -6,10 +6,10 @@ The scripts are a transparent reconstruction from the files available to the aut
 
 ## Code
 
-- `AoH_Reconstructed_Analysis/run_reconstructed_analysis.py` — selected PCA/Kernel PCA, Ward clustering, and SVC analyses.
-- `AoH_Reconstructed_Analysis/run_model_screening.py` — model-family screening sweep.
-- `AoH_Reconstructed_Analysis/regenerate_figures.py` — regenerates the analysis figures from locally available input files; figures are not distributed here.
-- `AoH_Reconstructed_Analysis/requirements.txt` — package versions used for the reconstruction.
+- `analysis/run_analysis.py` — selected PCA/Kernel PCA, Ward clustering, and SVC analyses.
+- `analysis/run_model_screening.py` — model-family screening sweep.
+- `analysis/regenerate_figures.py` — regenerates the analysis figures from locally available input files; figures are not distributed here.
+- `analysis/requirements.txt` — package versions used for this analysis implementation.
 
 ## Required input files (not included)
 
@@ -25,14 +25,14 @@ Do not upload or commit these files or any animal/sample-level data to this repo
 From the repository root, install dependencies and run the scripts:
 
 ```powershell
-python -m pip install -r .\AoH_Reconstructed_Analysis\requirements.txt
-python .\AoH_Reconstructed_Analysis\run_reconstructed_analysis.py
-python .\AoH_Reconstructed_Analysis\run_model_screening.py
+python -m pip install -r .\analysis\requirements.txt
+python .\analysis\run_analysis.py
+python .\analysis\run_model_screening.py
 $env:MPLBACKEND = 'Agg'
-python .\AoH_Reconstructed_Analysis\regenerate_figures.py
+python .\analysis\regenerate_figures.py
 ```
 
-Analysis tables are written to the local `AoH_Reconstructed_Analysis/results/` folder, and regenerated figures to `AoH_Reconstructed_Analysis/regenerated_figures/`. Both locations are ignored by Git to reduce the risk of publishing outputs or data accidentally.
+Analysis tables are written to the local `analysis/results/` folder, and regenerated figures to `analysis/regenerated_figures/`. Both locations are ignored by Git to reduce the risk of publishing outputs or data accidentally.
 
 ## Reuse
 
