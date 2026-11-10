@@ -18,8 +18,8 @@ The scripts remain separate modules so each stage can also be run and checked in
 
 With the required permissions, place these files locally in the ignored `inputs/` directory:
 
-1. MRS workbook: `inputs/mrs_peak_areas.xlsx`
-2. Animal-level histology table: `inputs/histology_animal_level.csv` (at minimum, `animal_id` and `NAS` columns)
+1. MRS workbook: inputs/mrs_peak_areas.xlsx. It must contain a PCA worksheet with the seven already-integrated peak-area features used by the scripts.
+2. Animal-level histology table: inputs/histology_animal_level.csv. It must contain animal_id and NAS for the analysis, plus diet, weeks, NAS_fibrosis, fibrosis_stage, and steatosis_grade for figure generation.
 
 Do not upload or commit these files or any animal/sample-level data to this repository. The MRS workbook is expected to contain the `PCA` worksheet and the seven already-integrated peak-area features used by the scripts. The scripts do not process raw NMR acquisition files.
 
