@@ -16,8 +16,9 @@ from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score, s
 from sklearn.preprocessing import RobustScaler, StandardScaler
 
 from run_analysis import (
+    DEFAULT_HISTOLOGY_CSV,
+    DEFAULT_MRS_WORKBOOK,
     FEATURES,
-    PROJECT_ROOT,
     load_data,
 )
 
@@ -85,9 +86,7 @@ def evaluate(
 
 
 def run() -> None:
-    mrs_path = PROJECT_ROOT / "Base de Datos V2" / "Base de Datos" / "CG Analise (Western y CDAA).xlsx"
-    hist_path = PROJECT_ROOT / "AoH_Final_Submission_Package" / "supplementary_data" / "histology_animal_level_data.csv"
-    df, _ = load_data(mrs_path, hist_path)
+    df, _ = load_data(DEFAULT_MRS_WORKBOOK, DEFAULT_HISTOLOGY_CSV)
     X_raw = df[[f"MRS_{peak}" for peak in FEATURES]].to_numpy(dtype=float)
     inputs = transformed_inputs(X_raw)
     targets = {
@@ -216,4 +215,5 @@ def run() -> None:
 
 if __name__ == "__main__":
     run()
+
 
