@@ -193,7 +193,7 @@ def run() -> None:
     pd.DataFrame(comparisons).to_csv(OUTPUT_DIR / "manuscript_screening_benchmark_comparison.csv", index=False)
 
     notes = {
-        "purpose": "Reconstructed candidate sweep; all candidates are exported rather than selecting an undocumented winner.",
+        "purpose": "Consolidated candidate sweep; all candidates are exported rather than selecting an undocumented winner.",
         "data": {"measurements": len(df), "animals": int(df["animal_id"].nunique()), "features": [f"MRS_{v}" for v in FEATURES]},
         "documented_choices": [
             "Ward linkage, Euclidean distance, k=3 primary and k=4 exploratory.",
@@ -206,10 +206,10 @@ def run() -> None:
             "Exact meaning of 'processed matrix' in the manuscript tables; here it is operationalized as the 7-column preprocessed input matrix and both it and PC1-PC2 are exported.",
             "KernelPCA degree-2 gamma/coef0 are not given; scikit-learn defaults are used and recorded by the source code.",
             "Zero replacement for CLR is not given; no pseudocount is added. The run stops if any input peak is zero or negative.",
-            "The family-level ranking and tie-breaking details are not fully stated; rank columns are descriptive, not an asserted reconstruction of the original selection rule.",
+            "The family-level ranking and tie-breaking details are not fully stated; rank columns are descriptive because the available methods do not fully specify a family-level selection rule.",
         ],
     }
-    (OUTPUT_DIR / "model_screening_reconstruction_notes.json").write_text(json.dumps(notes, indent=2), encoding="utf-8")
+    (OUTPUT_DIR / "model_screening_notes.json").write_text(json.dumps(notes, indent=2), encoding="utf-8")
     print(pd.DataFrame(comparisons).to_string(index=False))
     print(f"\nFull candidate CSVs written under: {OUTPUT_DIR}")
 
