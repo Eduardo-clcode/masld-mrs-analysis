@@ -1,0 +1,13 @@
+# Study data: do not publish
+*.xlsx
+*.xls
+*.csv
+Base de Datos V2/
+AoH_Final_Submission_Package/
+
+# Local outputs, environments, and caches
+.runtime_pkgs/
+__pycache__/
+*.py[cod]
+AoH_Reconstructed_Analysis/results/
+
