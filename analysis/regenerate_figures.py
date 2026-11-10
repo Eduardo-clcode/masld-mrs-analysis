@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -23,17 +24,19 @@ from run_analysis import (
     EXPERIMENTAL_CLASSES,
     FEATURES,
     HISTOLOGY_CLASSES,
-    PROJECT_ROOT,
+    DEFAULT_HISTOLOGY_CSV,
+    DEFAULT_MRS_WORKBOOK,
     cross_validated_predictions,
     load_data,
     svc_pipeline,
 )
 
 
-SOURCE_FIGURES = PROJECT_ROOT / "AoH_Final_Submission_Package" / "figs"
+_reference_figures = os.environ.get("REFERENCE_FIGURES_DIR")
+REFERENCE_FIGURES = Path(_reference_figures).expanduser() if _reference_figures else None
 OUT_DIR = Path(__file__).resolve().parent / "regenerated_figures"
-MRS_PATH = PROJECT_ROOT / "Base de Datos V2" / "Base de Datos" / "CG Analise (Western y CDAA).xlsx"
-HISTOLOGY_PATH = PROJECT_ROOT / "AoH_Final_Submission_Package" / "supplementary_data" / "histology_animal_level_data.csv"
+MRS_PATH = DEFAULT_MRS_WORKBOOK
+HISTOLOGY_PATH = DEFAULT_HISTOLOGY_CSV
 
 COLORS = {
     "No-MASH": "#168aad",
@@ -355,22 +358,27 @@ def format_metrics(y_true, y_pred, labels) -> str:
 def compare_files(generated: list[str]) -> None:
     rows = []
     for name in generated:
-        ref = SOURCE_FIGURES / name
+        ref = REFERENCE_FIGURES / name if REFERENCE_FIGURES else None
         out = OUT_DIR / name
         rows.append({
-            "reference": str(ref),
+            "reference": str(ref) if ref else "",
             "regenerated": str(out),
-            "reference_available": ref.exists(),
+            "reference_available": bool(ref and ref.exists()),
             "regenerated_available": out.exists(),
-            "comparison": "visual and quantitative checks; styling may differ",
+            "comparison": (
+                "visual and quantitative checks; styling may differ"
+                if ref else "No reference-figure directory supplied; generated output only"
+            ),
         })
-    rows.append({
-        "reference": str(SOURCE_FIGURES / "01_histology_representative.pdf"),
-        "regenerated": "NOT REGENERATED: source histology/gross-liver photographs not assembled from raw inputs",
-        "reference_available": (SOURCE_FIGURES / "01_histology_representative.pdf").exists(),
-        "regenerated_available": False,
-        "comparison": "source-image figure retained unchanged in submission package",
-    })
+    if REFERENCE_FIGURES:
+        histology_reference = REFERENCE_FIGURES / "01_histology_representative.pdf"
+        rows.append({
+            "reference": str(histology_reference),
+            "regenerated": "NOT REGENERATED: histology/gross-liver source images are not analysis inputs",
+            "reference_available": histology_reference.exists(),
+            "regenerated_available": False,
+            "comparison": "source-image figure is outside the quantitative analysis workflow",
+        })
     pd.DataFrame(rows).to_csv(OUT_DIR / "figure_file_comparison.csv", index=False)
 
 
@@ -485,4 +493,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
