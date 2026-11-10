@@ -35,7 +35,17 @@ python .\analysis\run_all.py
 
 The combined runner executes the selected analysis, model screening, and figure regeneration in that order. Analysis tables are written locally to `analysis/results/`, and figures to `analysis/regenerated_figures/`. These output folders are ignored by Git; neither input data nor generated figures are distributed here.
 
-The figure-generation step produces the quantitative PCA/Kernel PCA, clustering, SVC decision-region, and confusion-matrix figures. It does not recreate the representative histology/gross-liver photo panel because those source image files are not included.
+The figure-generation step produces these quantitative figures (each as PDF and PNG):
+
+- `02_histology_scores_boxplots`
+- `03_diet_time_pca_ward_k3`; `04_diet_time_pca_ward_k4_exploratory`
+- `05_nas_kpca_ward_k3`; `06_nas_kpca_ward_k4_exploratory`
+- `07_nas_binary_svc_decision_regions`; `08_nas_binary_measurement_loocv_confusion`
+- `fig5_experimental_svc_three_stage`; `fig6_experimental_loocv_three_stage`
+- `S1_nas_three_class_svc_decision_regions`; `S2_nas_three_class_measurement_loocv_confusion`
+- `S3_nas_three_class_leave_one_animal_out_confusion`; `S4_nas_binary_leave_one_animal_out_confusion`
+
+It does not recreate the representative histology/gross-liver photo panel because those source image files are not included.
 
 ## Reuse
 
