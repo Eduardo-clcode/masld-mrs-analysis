@@ -463,7 +463,7 @@ def main() -> None:
     figures.append("S4_nas_binary_leave_one_animal_out_confusion.png")
 
     # Numerical checks against manuscript claims and predictions already produced
-    # by the reconstructed analysis module.
+    # by the consolidated analysis module.
     checks = {
         "sample_counts": {"measurements": len(df), "animals": int(df["animal_id"].nunique())},
         "ward_clusters": {},
