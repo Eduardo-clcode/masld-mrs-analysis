@@ -9,5 +9,6 @@ AoH_Final_Submission_Package/
 .runtime_pkgs/
 __pycache__/
 *.py[cod]
-AoH_Reconstructed_Analysis/results/
+analysis/results/
+analysis/regenerated_figures/
 
