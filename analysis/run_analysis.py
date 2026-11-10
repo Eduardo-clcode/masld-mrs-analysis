@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from importlib.metadata import PackageNotFoundError, version
@@ -34,6 +35,8 @@ from sklearn.svm import SVC
 
 FEATURES = ["0.9", "1.2", "1.6", "2.0", "2.2", "2.8", "5.3"]
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_MRS_WORKBOOK = Path(os.environ.get("MRS_WORKBOOK", PROJECT_ROOT / "inputs" / "mrs_peak_areas.xlsx"))
+DEFAULT_HISTOLOGY_CSV = Path(os.environ.get("HISTOLOGY_CSV", PROJECT_ROOT / "inputs" / "histology_animal_level.csv"))
 EXPERIMENTAL_CLASSES = ["Control", "Steatosis-like", "MASH-like"]
 HISTOLOGY_CLASSES = ["No-MASH", "MASH-compatible"]
 EXPECTED = {
@@ -326,11 +329,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run the consolidated analyses specified in the study manuscript.")
     parser.add_argument(
         "--mrs-workbook", type=Path,
-        default=PROJECT_ROOT / "Base de Datos V2" / "Base de Datos" / "CG Analise (Western y CDAA).xlsx",
+        default=DEFAULT_MRS_WORKBOOK,
     )
     parser.add_argument(
         "--histology-csv", type=Path,
-        default=PROJECT_ROOT / "AoH_Final_Submission_Package" / "supplementary_data" / "histology_animal_level_data.csv",
+        default=DEFAULT_HISTOLOGY_CSV,
     )
     parser.add_argument(
         "--output-dir", type=Path,
@@ -341,4 +344,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
