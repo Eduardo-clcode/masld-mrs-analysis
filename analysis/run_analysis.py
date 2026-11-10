@@ -304,7 +304,7 @@ def run(args: argparse.Namespace) -> None:
         except PackageNotFoundError:
             package_versions[package] = "NOT INSTALLED / version unavailable"
     report = {
-        "status": "RECONSTRUCTION; verify metrics and unspecified choices before publication",
+        "status": "CONSOLIDATED_ANALYSIS; verify metrics and unspecified choices before publication",
         "input_files": {"mrs_workbook": str(args.mrs_workbook), "histology_csv": str(args.histology_csv)},
         "checks": checks,
         "selected_clustering": cluster_rows,
@@ -312,18 +312,18 @@ def run(args: argparse.Namespace) -> None:
         "indeterminate_posthoc_counts": posthoc["posthoc_prediction"].value_counts().to_dict(),
         "software_versions_this_run": package_versions,
         "limitations": [
-            "This is reconstructed code, not verified original code recovered from the former computer.",
+            "The workflow consolidates analysis steps from fragmented project materials; it is not a complete archive of the laboratory's original scripts.",
             "The submitted manuscript does not fully document every model-screening parameter or tie-breaking rule.",
-            "Software versions here describe this reconstruction runtime, not the original analysis environment.",
+            "Software versions here describe this implementation run and should not be interpreted as the original laboratory environment.",
             "The full-data post-hoc embedding is descriptive; cross-validation metrics use preprocessing fitted within each fold.",
         ],
     }
-    (args.output_dir / "reconstruction_audit.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    (args.output_dir / "analysis_audit.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report, indent=2))
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Reconstruct the analyses specified in the AoH submission manuscript.")
+    parser = argparse.ArgumentParser(description="Run the consolidated analyses specified in the study manuscript.")
     parser.add_argument(
         "--mrs-workbook", type=Path,
         default=PROJECT_ROOT / "Base de Datos V2" / "Base de Datos" / "CG Analise (Western y CDAA).xlsx",
