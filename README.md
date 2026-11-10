@@ -1,8 +1,8 @@
 # Ex-vivo hepatic FAME ¹H-NMR analysis code
 
-This public repository contains a reconstructed set of analysis scripts for ex-vivo hepatic fatty-acid methyl ester (FAME) ¹H-NMR measurements in a murine MASLD study. It contains code and run instructions only: no study data, tables, generated figures, manuscript, or analysis-result files are included.
+This repository consolidates the analysis workflow for ex-vivo hepatic fatty-acid methyl ester (FAME) ¹H-NMR measurements in a murine MASLD study. It brings together analysis stages maintained across fragmented project materials into one entry point, helping avoid repeated runs and duplicated workflow steps.
 
-The scripts are a transparent reconstruction from the files available to the authors; they are not the original laboratory scripts recovered from the acquisition computer. Some original preprocessing and model-selection details were not fully documented, so outputs should be interpreted with that limitation in mind.
+The implementation is based on the analysis materials and study files available to the authors. It is code and run instructions only: no study data, tables, generated figures, manuscript, or analysis-result files are included. It operates on an MRS workbook containing seven already-quantified peak-area variables; it does not process raw NMR acquisition files. Some preprocessing and model-selection details were not fully documented in the available materials, and those limitations are recorded in the analysis outputs. This repository is not a complete archive of the laboratory's original software.
 
 ## Code
 
@@ -33,7 +33,7 @@ $env:MPLBACKEND = 'Agg'
 python .\analysis\run_all.py
 ```
 
-The combined runner executes the selected analysis, model screening, and figure regeneration in that order. Analysis tables are written locally to `analysis/results/`, and figures to `analysis/regenerated_figures/`. These output folders are ignored by Git; neither input data nor generated figures are distributed here.
+The combined runner executes the selected analysis, model screening, and figure generation in that order. Analysis tables are written locally to `analysis/results/`, and figures to `analysis/regenerated_figures/`. These output folders are ignored by Git; neither input data nor generated figures are distributed here.
 
 The figure-generation step produces these quantitative figures (each as PDF and PNG):
 
@@ -50,4 +50,3 @@ It does not recreate the representative histology/gross-liver photo panel becaus
 ## Reuse
 
 No open-source license is included. Public visibility does not by itself grant permission to reuse the code. Confirm authorship, institutional, ethics-committee, and journal policies before redistribution or reuse.
-
