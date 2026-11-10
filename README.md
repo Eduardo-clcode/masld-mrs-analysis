@@ -17,10 +17,8 @@ The scripts remain separate modules so each stage can also be run and checked in
 
 With the required permissions, provide these files locally at the following paths relative to the repository root:
 
-1. MRS workbook: `Base de Datos V2/Base de Datos/CG Analise (Western y CDAA).xlsx`
-2. Animal-level histology table: `AoH_Final_Submission_Package/supplementary_data/histology_animal_level_data.csv`
-
-Do not upload or commit these files or any animal/sample-level data to this repository. The MRS workbook is expected to contain the `PCA` worksheet and the seven peak-area features used by the scripts.
+1. MRS workbook: 
+2. Animal-level histology table
 
 ## Run
 
@@ -32,20 +30,5 @@ $env:MPLBACKEND = 'Agg'
 python .\analysis\run_all.py
 ```
 
-The combined runner executes the selected analysis, model screening, and figure generation in that order. Analysis tables are written locally to `analysis/results/`, and figures to `analysis/regenerated_figures/`. These output folders are ignored by Git; neither input data nor generated figures are distributed here.
-
-The figure-generation step produces these quantitative figures (each as PDF and PNG):
-
-- `02_histology_scores_boxplots`
-- `03_diet_time_pca_ward_k3`; `04_diet_time_pca_ward_k4_exploratory`
-- `05_nas_kpca_ward_k3`; `06_nas_kpca_ward_k4_exploratory`
-- `07_nas_binary_svc_decision_regions`; `08_nas_binary_measurement_loocv_confusion`
-- `fig5_experimental_svc_three_stage`; `fig6_experimental_loocv_three_stage`
-- `S1_nas_three_class_svc_decision_regions`; `S2_nas_three_class_measurement_loocv_confusion`
-- `S3_nas_three_class_leave_one_animal_out_confusion`; `S4_nas_binary_leave_one_animal_out_confusion`
-
 It does not recreate the representative histology/gross-liver photo panel because those source image files are not included.
 
-## Reuse
-
-No open-source license is included. Public visibility does not by itself grant permission to reuse the code. Confirm authorship, institutional, ethics-committee, and journal policies before redistribution or reuse.
